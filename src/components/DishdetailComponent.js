@@ -5,13 +5,14 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 const Dish = (props) => {
     const dish = props.dish
     return (
-    <Card>
-        <CardImg top src={dish.image} alt={dish.name} />
-        <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-        </CardBody>
-    </Card>)
+        <Card>
+            <CardImg top src={dish.image} alt={dish.name} />
+            <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+                <CardText>{dish.description}</CardText>
+            </CardBody>
+        </Card>
+    );
 }
 
 const Comment = (props) => {
@@ -19,14 +20,11 @@ const Comment = (props) => {
     return (
         <div key={comment.id}>
             <li><p>{comment.comment}</p></li>
-            <li><p>-- {comment.author} , {new Date(comment.date).toLocaleDateString("en-US", {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                })}
+            <li><p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'})
+                                            .format(new Date(Date.parse(comment.date)))}
             </p></li>
         </div>
-    )
+    );
 }
 const Comments = (props) => {
     const comments = props.comments
@@ -44,19 +42,23 @@ const Comments = (props) => {
 }
 
 const DishDetail = (props) => {
-    const dish = props.selectedDish
+    const dish = props.dish
     let comments = []
     if (dish) {
-       comments = props.selectedDish.comments
+       comments = props.dish.comments
+    } else {
+        return <div></div>
     }
 
     return (
-        <div className="row">
-            <div className="col-12 col-md-5 m-1">
-                {dish && <Dish dish={dish} />}
-            </div>
-            <div className="col-12 col-md-5 m-1">
-                {comments && <Comments comments={comments}/>}
+        <div className="container">
+            <div className="row">
+                <div className="col-12 col-md-5 m-1">
+                    {dish && <Dish dish={dish} />}
+                </div>
+                <div className="col-12 col-md-5 m-1">
+                    {comments && <Comments comments={comments}/>}
+                </div>
             </div>
         </div>
     );
