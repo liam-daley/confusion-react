@@ -26,6 +26,7 @@ const Comment = (props) => {
         </div>
     );
 }
+
 const Comments = (props) => {
     const comments = props.comments
     const list = comments.map((comment) => {
