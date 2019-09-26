@@ -87,7 +87,8 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
-                            <Row className="form-group">                                <Label htmlFor="lastname" md={2}>Last Name</Label>
+                            <Row className="form-group">                                
+                                <Label htmlFor="lastname" md={2}>Last Name</Label>
                                 <Col md={10}>
                                     <Control.text model=".lastname" name="lastname"
                                         placeholder="Last Name"
@@ -106,7 +107,8 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
-                            <Row className="form-group">                                <Label htmlFor="telnum" md={2}>Contact Tel.</Label>
+                            <Row className="form-group">                                
+                                <Label htmlFor="telnum" md={2}>Contact Tel.</Label>
                                 <Col md={10}>
                                     <Control.text model=".telnum" name="telnum"
                                         placeholder="Tel. Number"
@@ -126,7 +128,8 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
-                            <Row className="form-group">                                <Label htmlFor="email" md={2}>Email</Label>
+                            <Row className="form-group">                                
+                                <Label htmlFor="email" md={2}>Email</Label>
                                 <Col md={10}>
                                     <Control.text model=".email" name="email"
                                         placeholder="Email"
@@ -144,7 +147,8 @@ class Contact extends Component {
                                         }} />
                                 </Col>
                             </Row>
-                            <Row className="form-group">                                <Col md={{size: 6, offset: 2}}>
+                            <Row className="form-group">                                
+                                <Col md={{size: 6, offset: 2}}>
                                     <div className="form-check">
                                         <Label check>
                                             <Control.checkbox model=".agree" name="agree"
@@ -162,14 +166,16 @@ class Contact extends Component {
                                     </Control.select>
                                 </Col>
                             </Row>
-                            <Row className="form-group">                                <Label htmlFor="message" md={2}>Your Feedback</Label>
+                            <Row className="form-group">                                
+                                <Label htmlFor="message" md={2}>Your Feedback</Label>
                                 <Col md={10}>
                                     <Control.textarea model=".message" id ="message" name="message"
                                         rows="12"
                                         className="form-control" />
                                 </Col>
                             </Row>
-                            <Row className="form-group">                                <Col md={{size: 10, offset: 2}}>
+                            <Row className="form-group">                                
+                                <Col md={{size: 10, offset: 2}}>
                                     <Button type="submit" color="primary">
                                         Send Feedback
                                     </Button>
