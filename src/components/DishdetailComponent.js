@@ -7,6 +7,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 
+const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
 
@@ -29,7 +30,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {
@@ -62,22 +63,23 @@ class CommentForm extends Component {
                                         placeholder="Your Name"
                                         className="form-control"
                                         validators={{
-                                            minLength: minLength(3), maxLength: maxLength(15)
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
                                         }} />
                                     <Errors 
                                         className="text-danger"
                                         model=".author"
                                         show="touched"
                                         messages={{
+                                            required: 'Required',
                                             minLength: 'Must be greater than 2 characters. ',
                                             maxLength: 'Must be 15 characters or less. '
                                         }} />
                                 </Col>
                             </Row>
                             <Row className="form-group">                                
-                                <Label htmlFor="message" md={12}>Comment</Label>
+                                <Label htmlFor="comment" md={12}>Comment</Label>
                                 <Col md={12}>
-                                    <Control.textarea model=".message" id ="message" name="message"
+                                    <Control.textarea model=".comment" id ="comment" name="comment"
                                         rows="6"
                                         className="form-control" />
                                 </Col>
@@ -120,7 +122,7 @@ const Comment = (props) => {
     );
 }
 
-function RenderComments({comments, addComment, dishId}) {
+function RenderComments({comments, postComment, dishId}) {
     if (comments != null) {
         const list = comments.map((comment) => {
             return <Comment comment={comment} />
@@ -130,7 +132,7 @@ function RenderComments({comments, addComment, dishId}) {
                 <h4>Comments</h4>
                 <ul className="list-unstyled">
                     {list}
-                    <CommentForm dishId={dishId} addComment={addComment} />
+                    <CommentForm dishId={dishId} postComment={postComment} />
                 </ul>
             </div>
         );
@@ -173,7 +175,7 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
                         {props.comments && <RenderComments comments={props.comments}
-                            addComment={props.addComment}
+                            postComment={props.postComment}
                             dishId={props.dish.id} />}
                     </div>
                 </div>
