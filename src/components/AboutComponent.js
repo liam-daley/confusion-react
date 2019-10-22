@@ -1,33 +1,48 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderLeader ({leaders}) {
-    const list = leaders.map((leader) => {
+    if (leaders.isLoading) {
         return (
-            <Media key={leader.id} as="li">
-                <Media left top>
-                    <Media object src={leader.image} alt={leader.name} />
-                </Media>
-                <Media body className="ml-5">
-                <Media heading>{leader.name}</Media>
-                <p>{leader.designation}</p>
-                <p>{leader.description}</p>
-                </Media>
-            </Media>
+            <Loading />
         );
-    });
-    return (
-        <div>
-            <ul className="list-unstyled">
-                {list}
-            </ul>
-        </div>
-    );
+    } else if (leaders.errMess) {
+        return (
+            <h4>{leaders.errMess}</h4>
+        );
+    } else if (leaders.leaders) {
+        const list = leaders.leaders.map((leader) => {
+            return (
+                <Media key={leader.id} as="li">
+                    <Media left top>
+                        <Media object src={baseUrl + leader.image} alt={leader.name} />
+                    </Media>
+                    <Media body className="ml-5">
+                    <Media heading>{leader.name}</Media>
+                    <p>{leader.designation}</p>
+                    <p>{leader.description}</p>
+                    </Media>
+                </Media>
+            );
+        });
+        return (
+            <div>
+                <ul className="list-unstyled">
+                    {list}
+                </ul>
+            </div>
+        );
+    } else {
+        return (
+            <div></div>
+        )
+    }
 }
 
-function About(props) {
-    
+const About = (props) => {
     return(
         <div className="container">
             <div className="row">
