@@ -1,6 +1,13 @@
-## Welcome to conFusion React
+# Confusion React
+
+Repository used for learning purposes.  
+**Course Certificate:** [Front-End Web Development with React](https://coursera.org/share/f1138ab8bc2d69542d2552d8d557691b)  
 
 To view this project correctly you must run the following commands:
+
+In the root of the project
+
+### `npm i`
 
 In the json-server folder (with json-server installed):
 
